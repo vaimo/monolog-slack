@@ -4,7 +4,9 @@ namespace Webthink\MonologSlack\Utility;
 
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Psr7;
 use Webthink\MonologSlack\Utility\Exception\TransferException;
 
 /**
@@ -37,8 +39,13 @@ class GuzzleClient implements ClientInterface
             $this->client->request('post', $webhook, [
                 RequestOptions::JSON => $data,
             ]);
+        } catch (RequestException $e) {
+            // Do nothing for now
+            //echo "REQUEST: " . Psr7\str($e->getRequest()) . PHP_EOL;
+            //exit(0);
         } catch (GuzzleException $e) {
-            throw new TransferException($e->getMessage(), $e->getCode(), $e);
+            // Do nothing for now
+            //throw new TransferException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }
