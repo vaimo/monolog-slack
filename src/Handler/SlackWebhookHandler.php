@@ -53,7 +53,13 @@ class SlackWebhookHandler extends AbstractProcessingHandler
         string $useCustomEmoji = null,
         int $level = Logger::ERROR,
         bool $bubble = true,
-        ClientInterface $client = null
+        ClientInterface $client = null,
+        float $timeout = 10,
+        float $connectTimeout = 10,
+        float $readTimeout = 10,
+        bool $verify = false,
+        string $forceIPResolve = 'v4',
+        bool $httpErrors = false
     ) {
         parent::__construct($level, $bubble);
 
@@ -64,8 +70,12 @@ class SlackWebhookHandler extends AbstractProcessingHandler
         if ($client === null) {
             $client = new GuzzleClient(
                 new Client([
-                    RequestOptions::TIMEOUT => 1,
-                    RequestOptions::CONNECT_TIMEOUT => 1,
+                    RequestOptions::TIMEOUT => $timeout, //Time Guzzle will wait, once a connection has been made, for the server to handle the request. For example waiting on a long running script.
+                    RequestOptions::CONNECT_TIMEOUT => $connectTimeout, //Time Guzzle will wait to establish a connection to the server
+                    RequestOptions::HTTP_ERRORS => $httpErrors,
+                    RequestOptions::FORCE_IP_RESOLVE => $forceIPResolve,
+                    RequestOptions::READ_TIMEOUT => $readTimeout,
+                    RequestOptions::VERIFY => $verify
                 ])
             );
         }
