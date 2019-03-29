@@ -1,16 +1,20 @@
 {
-    "name": "webthink/monolog-slack",
-    "homepage": "https://github.com/gmponos/monolog-slack",
+    "name": "drbiko/monolog-slack",
+    "homepage": "https://github.com/drbiko/monolog-slack",
     "description": "This package contains handlers/processors for sending logs of monolog to a slack channel.",
     "license": "MIT",
     "authors": [
         {
             "name": "George Mponos",
             "email": "gmponos@gmail.com"
+        },
+        {
+            "name": "Biko Allen",
+            "email": "biko@docresponse.com"
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.0",
         "ext-json": "*",
         "monolog/monolog": "^1.24",
         "php-http/guzzle6-adapter": "^2.0"
