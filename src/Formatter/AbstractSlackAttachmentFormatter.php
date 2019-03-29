@@ -2,6 +2,7 @@
 
 namespace Webthink\MonologSlack\Formatter;
 
+use Exception;
 use Monolog\Formatter\NormalizerFormatter;
 use Monolog\Logger;
 use Throwable;
@@ -107,24 +108,26 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
     }
 
     /**
-     * @param Throwable $e
+     * @param mixed $e
      * @return array
      * @throws \InvalidArgumentException
      */
     protected function normalizeException($e): array
     {
-        if (!$e instanceof Throwable) {
+        if (!$e instanceof Exception && !$e instanceof Throwable) {
             throw new \InvalidArgumentException(
-                sprintf('Throwable expected, got %s / %s', gettype($e), get_class($e))
+                sprintf('Exception/Throwable expected, got %s / %s', gettype($e), get_class($e))
             );
         }
 
-        return [
+        $data = [
             'class' => get_class($e),
             'message' => $e->getMessage(),
             'code' => $e->getCode(),
             'file' => $e->getFile() . ':' . $e->getLine(),
         ];
+
+        return $data;
     }
 
     /**
@@ -179,7 +182,7 @@ abstract class AbstractSlackAttachmentFormatter extends NormalizerFormatter impl
             return $data->format($this->dateFormat);
         }
 
-        if ($data instanceof Throwable) {
+        if ($data instanceof Exception || (PHP_VERSION_ID > 70000 && $data instanceof Throwable)) {
             return $this->normalizeException($data);
         }
 

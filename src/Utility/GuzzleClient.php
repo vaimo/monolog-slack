@@ -9,8 +9,6 @@ use Webthink\MonologSlack\Utility\Exception\TransferException;
 
 /**
  * This is a class that wraps a Guzzle Client in order to send records to slack.
- *
- * @deprecated Use a PSR-18 client instead.
  */
 class GuzzleClient implements ClientInterface
 {
@@ -24,7 +22,6 @@ class GuzzleClient implements ClientInterface
      */
     public function __construct(GuzzleClientInterface $client)
     {
-        @trigger_error('Using the custom HTTP Client implementation is deprecated and will be removed on 2.x. Use a PSR-18 HTTP Client instead.', E_USER_DEPRECATED);
         $this->client = $client;
     }
 
@@ -34,7 +31,7 @@ class GuzzleClient implements ClientInterface
      * @throws TransferException
      * @return void
      */
-    public function send(string $webhook, array $data): void
+    public function send(string $webhook, array $data)
     {
         try {
             $this->client->request('post', $webhook, [

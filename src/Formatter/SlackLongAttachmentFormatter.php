@@ -5,7 +5,7 @@ namespace Webthink\MonologSlack\Formatter;
 /**
  * A Formatter that you can use in order to send to slack log message using the Attachment format.
  *
- * This Formatter will give the message of slack a Long format meaning that each key of the log context will be separate.
+ * This Formatter will give the message a Long format.
  *
  * @author George Mponos <gmponos@gmail.com>
  */
@@ -19,6 +19,9 @@ class SlackLongAttachmentFormatter extends AbstractSlackAttachmentFormatter
     {
         $result = [];
         foreach ($record as $key => $value) {
+            if (is_null($value)) {
+                $value = '';
+            }
             if (is_array($value)) {
                 $value = $this->truncateStringIfNeeded($this->toJson($value, true));
 
