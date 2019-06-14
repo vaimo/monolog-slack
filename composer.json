@@ -1,6 +1,6 @@
 {
-    "name": "webthink/monolog-slack",
-    "homepage": "https://github.com/gmponos/monolog-slack",
+    "name": "vaimo/monolog-slack",
+    "homepage": "https://github.com/vaimo/monolog-slack",
     "description": "This package contains handlers/processors for sending logs of monolog to a slack channel.",
     "license": "MIT",
     "authors": [
@@ -10,9 +10,9 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.0|^7.1",
         "ext-json": "*",
-        "monolog/monolog": "dev-master",
+        "monolog/monolog": "^1.24.0",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0"
     },
