@@ -1,5 +1,5 @@
 {
-    "name": "drbiko/monolog-slack",
+    "name": "vaimo/monolog-slack",
     "homepage": "https://github.com/drbiko/monolog-slack",
     "description": "This package contains handlers/processors for sending logs of monolog to a slack channel.",
     "license": "MIT",
