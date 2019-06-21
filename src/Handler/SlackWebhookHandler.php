@@ -72,7 +72,7 @@ final class SlackWebhookHandler extends AbstractProcessingHandler
      * @param array $record
      * @return void
      */
-    protected function write(array $record): void
+    protected function write(array $record)
     {
         $body = json_encode($record['formatted']);
         if ($body === false) {
